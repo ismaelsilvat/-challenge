@@ -5,10 +5,10 @@ class CharacterService {
   async findAll(page: number = 1, pageSize: number = 50): Promise<{ data: Character[]; totalPages: number }> {
     const response = await api.get<
       { data: Character[], info: {
-        "totalPages": number,
-        "count": number,
-        "previousPage":string,
-        "nextPage": string,
+        totalPages: number,
+        count: number,
+        previousPage:string,
+        nextPage: string,
       }}
     >('/character', { params: { page, pageSize } });
     return {
