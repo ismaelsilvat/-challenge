@@ -48,7 +48,6 @@ const CharacterGrid: React.FC<CharacterGridProps> = ({ data, className = "bg-[#F
             onViewProfile={() => handleViewProfile(character)}
           />
         )}
-        columns={4}
       />
       {!data && characters.length > 0 && (
         <div className="flex justify-between items-center bg-[#F1F2F3] px-5 md:px-20 pb-10">

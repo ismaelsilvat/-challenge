@@ -23,8 +23,8 @@ const ProfileEditForm: React.FC<ProfileEditFormProps> = ({ onSubmit, defaultValu
         <Input name="birthDate" label="Birth Date" type="date" required />
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <Input name="city" label="City" placeholder="City" required />
-          <Input name="state" label="State" options={['CA', 'FL', 'NY']} required />
+          <Input name="city" label="City" placeholder="City" />
+          <Input name="state" label="State" options={['CA', 'FL', 'NY']} />
         </div>
 
         <Input name="favoriteCharacter" label="Favorite Disney Character" placeholder="e.g., Elsa" />
