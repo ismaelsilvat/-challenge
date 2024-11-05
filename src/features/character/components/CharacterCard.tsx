@@ -11,9 +11,9 @@ const CharacterCard: React.FC<CharacterCardProps> = ({ character, onViewProfile 
 
   return (
     <div
-      className="w-[248px] h-[416px] flex flex-col items-center bg-white shadow-md overflow-hidden"
+      className="w-full md:w-[248px] md: h-[416px] flex flex-col items-center bg-white shadow-md overflow-hidden"
     >
-      <img src={character.imageUrl} alt={character.name} className="w-[248px] min-h-[248px] max-h-[248px] object-cover" />
+      <img src={character.imageUrl} alt={character.name} className="w-full md:w-[248px] min-h-[248px] max-h-[248px] object-cover" />
       <div className="p-4 flex flex-col gap-2 justify-center text-center">
         <h3 className="font-lato text-[18px] font-bold text-gray-600">
           {character.name}

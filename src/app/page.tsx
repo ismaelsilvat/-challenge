@@ -3,15 +3,16 @@ import FeaturedCharacters from "@/features/character/components/FeaturedCharacte
 import CharacterGrid from "@/features/character/components/CharacterGrid";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import Container from "@/components/Container";
 
 export default function Home() {
 
   return (
-    <main className="container mx-auto px-4">
+    <Container className="px-4">
       <Navbar />
       <CharacterGrid />
       <FeaturedCharacters />
       <Footer/>
-    </main>
+    </Container>
   );
 }

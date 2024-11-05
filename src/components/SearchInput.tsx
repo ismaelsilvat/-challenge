@@ -17,7 +17,7 @@ const SearchInput: React.FC<SearchInputProps> = ({ placeholder = 'Search...' }) 
   };
 
   return (
-    <div className="relative w-[976px]">
+    <div className="relative w-full">
       <input
         type="text"
         value={searchQuery}

@@ -1,4 +1,4 @@
-import {Character} from "@/types/character";
+import { Character } from "@/types/character";
 import api from "@/services/api";
 
 class CharacterService {

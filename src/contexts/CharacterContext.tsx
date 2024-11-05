@@ -45,6 +45,7 @@ export const CharacterProvider: React.FC<{ children: ReactNode }> = ({ children 
           const results = await CharacterService.findByFilters({ name: searchQuery });
           setCharacters(results);
           setTotalPages(1);
+          setPage(1);
         } else {
           const { data, totalPages: apiTotalPages } = await CharacterService.findAll(page, 8);
           setCharacters(data);
