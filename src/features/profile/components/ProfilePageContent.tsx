@@ -1,10 +1,11 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import Button from "@/components/Button";
 import ProfileEditForm from "@/features/profile/components/ProfileEditForm";
 import Container from "@/components/Container";
-import {Profile} from "@/types/profile";
+import { Profile } from "@/types/profile";
 import Cookies from "js-cookie";
 import { PROFILE_COOKIE_KEY } from "@/features/profile/const/profile";
+import {useCharacters} from "@/contexts/CharacterContext";
 
 const initialProfile: Profile = {
   firstName: 'John',
@@ -32,6 +33,13 @@ const FieldData = ({name, value}: FieldDataProps) => (
 const ProfilePageContent = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [profile, setProfile] = useState<Profile>(initialProfile);
+  const { enableSearch, setEnableSearch } = useCharacters()
+
+  useEffect(() => {
+    if (enableSearch) {
+      setEnableSearch(false)
+    }
+  }, [enableSearch]);
 
   useEffect(() => {
     const savedProfile = Cookies.get(PROFILE_COOKIE_KEY);

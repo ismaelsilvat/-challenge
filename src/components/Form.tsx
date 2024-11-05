@@ -6,14 +6,15 @@ type FormComponentProps<T extends FieldValues> = {
   defaultValues?: DefaultValues<T>;
   children: (methods: UseFormReturn<T>) => ReactNode;
   className?: string;
+  dataTestId?: string;
 };
 
-const Form = <T extends FieldValues>({ onSubmit, defaultValues, children, className }: FormComponentProps<T>) => {
+const Form = <T extends FieldValues>({ onSubmit, defaultValues, children, className, dataTestId }: FormComponentProps<T>) => {
   const methods = useForm<T>({ defaultValues: defaultValues as DefaultValues<T> });
 
   return (
     <FormProvider {...methods}>
-      <form onSubmit={methods.handleSubmit(onSubmit)} className={`space-y-4 ${className}`}>
+      <form data-testid={dataTestId} onSubmit={methods.handleSubmit(onSubmit)} className={`space-y-4 ${className}`}>
         {children(methods)}
       </form>
     </FormProvider>

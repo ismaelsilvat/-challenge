@@ -1,5 +1,5 @@
 "use client"
-import React, { createContext, useContext, useEffect, useState, ReactNode } from 'react';
+import React, { createContext, useContext, useEffect, useState, ReactNode, useCallback } from 'react';
 import { Character } from "@/types/character";
 import CharacterService from "@/features/character/services/character.service";
 
@@ -11,51 +11,51 @@ type CharacterContextType = {
   page: number;
   setPage: (page: number) => void;
   totalPages: number;
+  isLoading: boolean;
+  setEnableSearch: (value: boolean) => void;
+  enableSearch: boolean;
 };
 
 const CharacterContext = createContext<CharacterContextType | undefined>(undefined);
 
 export const CharacterProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [featuredCharacters, setFeaturedCharacters] = useState<Character[]>([]);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState<string>('');
   const [characters, setCharacters] = useState<Character[]>([]);
-  const [page, setPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
+  const [page, setPage] = useState<number>(1);
+  const [totalPages, setTotalPages] = useState<number>(1);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [enableSearch, setEnableSearch] = useState<boolean>(true);
+
+  const loadCharacters = useCallback(async () => {
+    setIsLoading(true)
+    if (searchQuery) {
+      const results = await CharacterService.findByFilters({ name: searchQuery });
+      setCharacters(results);
+      setTotalPages(1);
+      setPage(1);
+    } else {
+      const { data, totalPages: apiTotalPages } = await CharacterService.findAll(page, 8);
+      setCharacters(data);
+      setTotalPages(apiTotalPages);
+    }
+    setIsLoading(false)
+  }, [searchQuery, page]);
+
+  const loadFeaturedCharacters = async () => {
+    const featuredNames = ['Belle', 'Beast', 'Mickey Mouse', 'Donald Duck'];
+    const characterPromises = featuredNames.map(name => CharacterService.findByFilters({ name, ...(name === "Belle" && {films: ["Beauty and the Beast"]}) }));
+    const results = await Promise.all(characterPromises);
+    const featured = results.flatMap(result => result).filter(character => featuredNames.includes(character.name));
+    setFeaturedCharacters(featured);
+  };
 
   useEffect(() => {
-    const loadFeaturedCharacters = async () => {
-      try {
-        const featuredNames = ['Belle', 'Beast', 'Mickey Mouse', 'Donald Duck'];
-        const characterPromises = featuredNames.map(name => CharacterService.findByFilters({ name, ...(name === "Belle" && {films: ["Beauty and the Beast"]}) }));
-        const results = await Promise.all(characterPromises);
-        const featured = results.flatMap(result => result).filter(character => featuredNames.includes(character.name));
-        setFeaturedCharacters(featured);
-      } catch (error) {
-        console.error('Failed to load featured characters:', error);
-      }
-    };
-
     loadFeaturedCharacters();
+    loadCharacters()
   }, []);
 
   useEffect(() => {
-    const loadCharacters = async () => {
-      try {
-        if (searchQuery) {
-          const results = await CharacterService.findByFilters({ name: searchQuery });
-          setCharacters(results);
-          setTotalPages(1);
-          setPage(1);
-        } else {
-          const { data, totalPages: apiTotalPages } = await CharacterService.findAll(page, 8);
-          setCharacters(data);
-          setTotalPages(apiTotalPages);
-        }
-      } catch (error) {
-        console.error('Failed to load characters:', error);
-      }
-    };
-
     loadCharacters();
   }, [searchQuery, page]);
 
@@ -68,6 +68,9 @@ export const CharacterProvider: React.FC<{ children: ReactNode }> = ({ children 
       page,
       setPage,
       totalPages,
+      isLoading,
+      enableSearch,
+      setEnableSearch
     }}>
       {children}
     </CharacterContext.Provider>

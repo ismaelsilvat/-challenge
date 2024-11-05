@@ -12,7 +12,7 @@ type ProfileEditFormProps = {
 };
 
 const ProfileEditForm: React.FC<ProfileEditFormProps> = ({ onSubmit, defaultValues, onCancel }) => (
-  <Form<Profile> onSubmit={(values) => onSubmit({...values, lastUpdated: dayjs().format("MMMM D, YYYY")})} defaultValues={defaultValues} className="space-y-6 bg-gray-50 p-8 rounded-lg shadow-sm">
+  <Form<Profile> dataTestId="profile-form" onSubmit={(values) => onSubmit({...values, lastUpdated: dayjs().format("MMMM D, YYYY")})} defaultValues={defaultValues} className="space-y-6 bg-gray-50 p-8 rounded-lg shadow-sm">
     {() => (
       <div className="w-full md:w-3/4 flex flex-col gap-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

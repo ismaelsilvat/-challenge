@@ -1,18 +1,20 @@
-import React, { useState } from 'react';
+"use client"
+import React, {useEffect, useState} from 'react';
 import CharacterCard from './CharacterCard';
 import { Character } from '@/types/character';
 import Grid from '@/components/Grid';
 import Button from '@/components/Button';
 import { useCharacters } from "@/contexts/CharacterContext";
-import SelectedCharacter from "@/features/character/components/SelectedCharacter";
+import CharacterDetails from "@/features/character/components/CharacterDetails";
+import SkeletonCard from "@/components/SkeletonCard";
 
 type CharacterGridProps = {
-  data?: Character[];
+  isFeaturedGrid?: boolean;
   className?: string;
 };
 
-const CharacterGrid: React.FC<CharacterGridProps> = ({ data, className = "bg-[#F1F2F3] p-10 md:p-20" }) => {
-  const { searchQuery, characters, page, setPage, totalPages} = useCharacters();
+const CharacterGrid: React.FC<CharacterGridProps> = ({ isFeaturedGrid, className = "bg-[#F1F2F3] p-10 md:p-20" }) => {
+  const { isLoading, searchQuery, characters, featuredCharacters, page, setPage, totalPages, enableSearch, setEnableSearch } = useCharacters();
   const [selectedCharacter, setSelectedCharacter] = useState<Character | null>(null);
 
   const handleViewProfile = (character: Character) => {
@@ -21,7 +23,14 @@ const CharacterGrid: React.FC<CharacterGridProps> = ({ data, className = "bg-[#F
 
   const handleBackToGrid = () => {
     setSelectedCharacter(null);
+    setEnableSearch(true)
   };
+
+  useEffect(() => {
+    if (selectedCharacter && enableSearch) {
+      setEnableSearch(false)
+    }
+  }, [enableSearch, selectedCharacter]);
 
   const handleNextPage = () => {
     if (page < totalPages) setPage(page + 1);
@@ -32,24 +41,28 @@ const CharacterGrid: React.FC<CharacterGridProps> = ({ data, className = "bg-[#F
   };
 
   if (selectedCharacter) {
-    return  <SelectedCharacter selectedCharacter={selectedCharacter} onBack={handleBackToGrid} />;
+    return <CharacterDetails character={selectedCharacter} onBack={handleBackToGrid} />;
   }
 
   return (
     <>
       <Grid
-        title={(searchQuery && !data) ? `Search Results - ${searchQuery}` : undefined}
+        title={(searchQuery && !isFeaturedGrid) ? `Search Results - ${searchQuery}` : undefined}
         className={className}
-        items={data ?? characters}
-        renderItem={(character) => (
-          <CharacterCard
-            key={character._id}
-            character={character}
-            onViewProfile={() => handleViewProfile(character)}
-          />
+        items={isFeaturedGrid ? featuredCharacters : characters.length > 0 ? characters : Array.from({ length: 8 }) as Character[]}
+        renderItem={(character: Character, index: number) => (
+          isLoading ? (
+            <SkeletonCard key={index} />
+          ) : (
+            <CharacterCard
+              key={character._id}
+              character={character}
+              onViewProfile={() => handleViewProfile(character)}
+            />
+          )
         )}
       />
-      {!data && characters.length > 0 && (
+      {!isFeaturedGrid && characters.length > 0 && (
         <div className="flex justify-between items-center bg-[#F1F2F3] px-5 md:px-20 pb-10">
           <Button onClick={handlePreviousPage} disabled={page === 1}>
             Previous
