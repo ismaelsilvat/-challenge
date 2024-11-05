@@ -8,6 +8,9 @@ type CharacterContextType = {
   searchQuery: string;
   setSearchQuery: (query: string) => void;
   characters: Character[];
+  page: number;
+  setPage: (page: number) => void;
+  totalPages: number;
 };
 
 const CharacterContext = createContext<CharacterContextType | undefined>(undefined);
@@ -16,6 +19,8 @@ export const CharacterProvider: React.FC<{ children: ReactNode }> = ({ children 
   const [featuredCharacters, setFeaturedCharacters] = useState<Character[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [characters, setCharacters] = useState<Character[]>([]);
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
 
   useEffect(() => {
     const loadFeaturedCharacters = async () => {
@@ -34,22 +39,24 @@ export const CharacterProvider: React.FC<{ children: ReactNode }> = ({ children 
   }, []);
 
   useEffect(() => {
-    const searchCharactersByName = async () => {
+    const loadCharacters = async () => {
       try {
         if (searchQuery) {
           const results = await CharacterService.findByFilters({ name: searchQuery });
           setCharacters(results);
+          setTotalPages(1);
         } else {
-          const { data } = await CharacterService.findAll(1, 8);
+          const { data, totalPages: apiTotalPages } = await CharacterService.findAll(page, 8);
           setCharacters(data);
+          setTotalPages(apiTotalPages);
         }
       } catch (error) {
-        console.error('Failed to search characters:', error);
+        console.error('Failed to load characters:', error);
       }
     };
 
-    searchCharactersByName();
-  }, [searchQuery]);
+    loadCharacters();
+  }, [searchQuery, page]);
 
   return (
     <CharacterContext.Provider value={{
@@ -57,6 +64,9 @@ export const CharacterProvider: React.FC<{ children: ReactNode }> = ({ children 
       featuredCharacters,
       searchQuery,
       setSearchQuery,
+      page,
+      setPage,
+      totalPages,
     }}>
       {children}
     </CharacterContext.Provider>
