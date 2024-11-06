@@ -1,36 +1,50 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Disney Character Search Application
+This project is a Disney fan site that allows users to search for their favorite Disney characters, view detailed information, and edit profile preferences. The application is built using Next.js, TypeScript, TailwindCSS, and React Hook Form, with data powered by the Disney API.
 
-## Getting Started
+Steps to run:
 
-First, run the development server:
+Install dependencies:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+`npm install --legacy-peer-deps`
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+This will install all the required packages specified in package.json.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Running the Application
+Start the development server:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+`npm run dev`
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+Running Tests
+This application includes tests written with Jest and React Testing Library.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Run all tests:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+`npm test`
 
-## Deploy on Vercel
+Technologies Used
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+`Next.js: Framework for server-rendered React applications.`
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+`TypeScript: Provides static typing, improving code quality and readability.`
+
+`TailwindCSS: Utility-first CSS framework for fast and responsive UI development.`
+
+`React Hook Form: Simplifies form management with validation.`
+
+`Jest: Testing framework for JavaScript.`
+
+`React Testing Library: Utilities for testing React components in a user-centric way.`
+
+
+Features
+
+`Character Search: Allows users to search for Disney characters using the Disney API.`
+
+`Character Details: Displays detailed information about each character, including movies and TV shows.`
+
+`User Profile: Enables users to view and edit profile information such as favorite characters and locations.`
+
+`Loading Skeletons: Displays skeletons while data is loading for a smoother user experience.`
+
+`Responsive Design: Optimized for mobile, tablet, and desktop views.`
