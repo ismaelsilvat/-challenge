@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen, fireEvent, within } from '@testing-library/react';
-import { CharacterProvider } from '@/contexts/CharacterContext';
+import { CharacterProvider } from '@/features/character/contexts/CharacterContext';
 import CharacterService from '@/features/character/services/character.service';
 import CharacterGrid from "@/features/character/components/CharacterGrid";
 

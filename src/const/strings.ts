@@ -22,7 +22,7 @@ export const strings = {
   featuredFilms: "Featured Films",
   shortFilms: "Short Films",
   tvShows: "TV Shows",
-  exploreMoreCharacterDetails: "Explore more character details",
+  exploreMoreCharacterDetails: "Explore More Character Details",
   none: "None",
   search: "Search...",
   searchResults: "Search Results",

@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import UserProfile from "@/components/Profile";
 import SearchInput from "@/components/SearchInput";
 import Logo from "@/components/Logo";
-import { useCharacters } from "@/contexts/CharacterContext";
+import { useCharacters } from "@/features/character/contexts/CharacterContext";
 import useDebounce from "@/hooks/useDebounce";
 import {strings} from "@/const/strings";
 

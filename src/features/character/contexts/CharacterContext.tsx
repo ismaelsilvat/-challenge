@@ -9,12 +9,10 @@ type CharacterContextType = {
   searchQuery: string;
   setSearchQuery: (query: string) => void;
   characters: Character[];
-  page: number;
-  setPage: (page: number) => void;
-  totalPages: number;
   isLoading: boolean;
   setEnableSearch: (value: boolean) => void;
   enableSearch: boolean;
+  loadCharacters: (page: number, setPage: (page: number) => void, setTotalPages: (totalPages: number) => void) => Promise<void>
 };
 
 const CharacterContext = createContext<CharacterContextType | undefined>(undefined);
@@ -23,12 +21,10 @@ export const CharacterProvider: React.FC<{ children: ReactNode }> = ({ children 
   const [featuredCharacters, setFeaturedCharacters] = useState<Character[]>([]);
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [characters, setCharacters] = useState<Character[]>([]);
-  const [page, setPage] = useState<number>(1);
-  const [totalPages, setTotalPages] = useState<number>(1);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [enableSearch, setEnableSearch] = useState<boolean>(true);
 
-  const loadCharacters = useCallback(async () => {
+  const loadCharacters = useCallback(async (page: number,  setPage: (page: number) => void, setTotalPages: (totalPages: number) => void) => {
     setIsLoading(true)
     if (searchQuery) {
       const results = await CharacterService.findByFilters({ name: searchQuery });
@@ -41,7 +37,7 @@ export const CharacterProvider: React.FC<{ children: ReactNode }> = ({ children 
       setTotalPages(apiTotalPages);
     }
     setIsLoading(false)
-  }, [searchQuery, page]);
+  }, [searchQuery]);
 
   const loadFeaturedCharacters = async () => {
     const characterPromises = featuredNames.map(name => CharacterService.findByFilters({ name, ...(name === "Belle" && {films: ["Beauty and the Beast"]}) }));
@@ -52,12 +48,7 @@ export const CharacterProvider: React.FC<{ children: ReactNode }> = ({ children 
 
   useEffect(() => {
     loadFeaturedCharacters();
-    loadCharacters()
   }, []);
-
-  useEffect(() => {
-    loadCharacters();
-  }, [searchQuery, page]);
 
   return (
     <CharacterContext.Provider value={{
@@ -65,12 +56,10 @@ export const CharacterProvider: React.FC<{ children: ReactNode }> = ({ children 
       featuredCharacters,
       searchQuery,
       setSearchQuery,
-      page,
-      setPage,
-      totalPages,
       isLoading,
       enableSearch,
-      setEnableSearch
+      setEnableSearch,
+      loadCharacters
     }}>
       {children}
     </CharacterContext.Provider>

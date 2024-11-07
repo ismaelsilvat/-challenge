@@ -5,7 +5,7 @@ import Container from "@/components/Container";
 import { Profile } from "@/features/profile/types/profile";
 import Cookies from "js-cookie";
 import { PROFILE_COOKIE_KEY } from "@/features/profile/const/profile";
-import { useCharacters } from "@/contexts/CharacterContext";
+import { useCharacters } from "@/features/character/contexts/CharacterContext";
 import {strings} from "@/const/strings";
 
 const initialProfile: Profile = {

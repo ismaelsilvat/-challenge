@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import {useCharacters} from "@/contexts/CharacterContext";
+import {useCharacters} from "@/features/character/contexts/CharacterContext";
 
 const Logo: React.FC = () => {
   const { setEnableSearch } = useCharacters()
