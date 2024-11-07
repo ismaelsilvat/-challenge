@@ -1,4 +1,5 @@
 import React from 'react';
+import { strings } from "@/const/strings";
 
 type SearchInputProps = {
   placeholder?: string;
@@ -9,7 +10,7 @@ type SearchInputProps = {
   value: string;
 };
 
-const SearchInput: React.FC<SearchInputProps> = ({ placeholder = 'Search...', disabled = false, value, className, onChange, onClear }) => {
+const SearchInput: React.FC<SearchInputProps> = ({ placeholder = strings.search, disabled = false, value, className, onChange, onClear }) => {
   return (
     <div className="relative w-full">
       <input
@@ -24,7 +25,7 @@ const SearchInput: React.FC<SearchInputProps> = ({ placeholder = 'Search...', di
         <button
           onClick={onClear}
           className="absolute right-4 top-1/2 transform -translate-y-1/2 text-base text-placeholder"
-          aria-label="Clear search"
+          aria-label={strings.clearSearch}
         >
           ✕
         </button>

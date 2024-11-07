@@ -6,6 +6,7 @@ import { Profile } from "@/features/profile/types/profile";
 import Cookies from "js-cookie";
 import { PROFILE_COOKIE_KEY } from "@/features/profile/const/profile";
 import { useCharacters } from "@/contexts/CharacterContext";
+import {strings} from "@/const/strings";
 
 const initialProfile: Profile = {
   firstName: 'John',
@@ -63,13 +64,13 @@ const ProfilePageContent = () => {
         {!isEditing ? (
             <>
               <h1 className="text-xl font-bold text-defaultText">{profile.firstName} {profile.lastName}</h1>
-              <p className="text-defaultText text-sm mb-8">Last Updated: {profile.lastUpdated}</p>
-              <FieldData name="Age" value={new Date().getFullYear() - new Date(profile.birthDate).getFullYear()} />
-              <FieldData name="Location" value={`${profile.city}, ${profile.state}`} />
-              <FieldData name="Favorite Disney Character" value={profile.favoriteCharacter} />
-              <FieldData name="Favorite Disney Movie" value={profile.favoriteMovie} />
-              <FieldData name="Favorite Disneyland" value={profile.favoriteDisneyland} />
-              <Button onClick={handleEdit} className="mt-4 btn-primary">Edit Profile</Button>
+              <p className="text-defaultText text-sm mb-8">{strings.lastUpdated} {profile.lastUpdated}</p>
+              <FieldData name={strings.age} value={new Date().getFullYear() - new Date(profile.birthDate).getFullYear()} />
+              <FieldData name={strings.location} value={`${profile.city}, ${profile.state}`} />
+              <FieldData name={strings.favoriteDisneyCharacter} value={profile.favoriteCharacter} />
+              <FieldData name={strings.favoriteDisneyMovie} value={profile.favoriteMovie} />
+              <FieldData name={strings.favoriteDisneyland} value={profile.favoriteDisneyland} />
+              <Button onClick={handleEdit} className="mt-4 btn-primary">{strings.editProfile}</Button>
             </>
           )
           : (

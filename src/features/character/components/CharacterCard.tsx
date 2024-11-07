@@ -1,6 +1,7 @@
 import React from 'react';
 import { Character } from "@/features/character/types/character";
 import Button from "@/components/Button";
+import { strings } from "@/const/strings";
 
 type CharacterCardProps = {
   character: Character;
@@ -17,17 +18,17 @@ const CharacterCard: React.FC<CharacterCardProps> = ({ character, onViewProfile 
           {character?.name}
         </h3>
         <p className="text-base font-semibold leading-[16px] text-defaultText mt-2">
-          Featured Films
+          {strings.featuredFilms}
         </p>
         <p className="text-base leading-[16px] text-defaultText line-clamp-1">
-          {featuredFilms.length > 0 ? featuredFilms : "None"}
+          {featuredFilms.length > 0 ? featuredFilms : strings.none}
         </p>
         <Button
           variant="text"
           onClick={onViewProfile}
           className="mt-4 text-link font-extrabold text-defaultText underline"
         >
-          VIEW PROFILE
+          {strings.viewProfile}
         </Button>
       </div>
     </div>

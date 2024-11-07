@@ -1,9 +1,10 @@
-import React, {useEffect, useMemo, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import UserProfile from "@/components/Profile";
 import SearchInput from "@/components/SearchInput";
 import Logo from "@/components/Logo";
 import { useCharacters } from "@/contexts/CharacterContext";
 import useDebounce from "@/hooks/useDebounce";
+import {strings} from "@/const/strings";
 
 const Navbar: React.FC = () => {
   const { setSearchQuery, enableSearch } = useCharacters();
@@ -32,7 +33,7 @@ const Navbar: React.FC = () => {
           onChange={handleInputChange}
           onClear={clearSearch}
           disabled={!enableSearch}
-          placeholder="Find a character..."
+          placeholder={strings.findCharacter}
           className={enableSearch ? "" : "opacity-50"}
         />
       </div>
@@ -43,7 +44,7 @@ const Navbar: React.FC = () => {
           onChange={handleInputChange}
           onClear={clearSearch}
           disabled={!enableSearch}
-          placeholder="Find a character..."
+          placeholder={strings.findCharacter}
           className={enableSearch ? "" : "opacity-50"}
         />
       </div>
