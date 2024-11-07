@@ -21,10 +21,13 @@ type FindByFilters = {
   films?: string[]
 }
 
+enum ApiCharacterEndpoint {
+  CHARACTER = '/character'
+}
 
 class CharacterService {
   async findAll(page: number = 1, pageSize: number = 50): Promise<FindAllPromiseResponse> {
-    const response = await api.get<FindAllGetResponse>('/character', { params: { page, pageSize } });
+    const response = await api.get<FindAllGetResponse>(ApiCharacterEndpoint.CHARACTER, { params: { page, pageSize } });
     return {
       data: response.data.data,
       totalPages: response.data.info.totalPages,
@@ -32,7 +35,7 @@ class CharacterService {
   }
 
   async findByFilters(filters : FindByFilters): Promise<Character[]> {
-    const response = await api.get<{ data: Character[] }>('/character', { params: { ...filters } });
+    const response = await api.get<{ data: Character[] }>(ApiCharacterEndpoint.CHARACTER, { params: { ...filters } });
     return response.data.data;
   }
 }
