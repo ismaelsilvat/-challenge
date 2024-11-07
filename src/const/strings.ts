@@ -15,6 +15,7 @@ export const strings = {
   cancel: "Cancel",
   editProfile: "Edit Profile",
   featuredCharacters: "Featured Characters!",
+  page: (page: number, totalPages: number) => `Page ${page} of ${totalPages}`,
   noTitleAvailable: (title: string) => `No ${title} available.`,
   previous: "Previous",
   back: "Back",

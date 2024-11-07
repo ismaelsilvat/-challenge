@@ -68,7 +68,7 @@ const CharacterGrid: React.FC<CharacterGridProps> = ({ isFeaturedGrid, className
           <Button onClick={handlePreviousPage} disabled={page === 1}>
             {strings.previous}
           </Button>
-          <span className="text-defaultText">Page {page} of {totalPages}</span>
+          <span className="text-defaultText">{strings.page(page, totalPages)}</span>
           <Button onClick={handleNextPage} disabled={page === totalPages}>
             {strings.next}
           </Button>

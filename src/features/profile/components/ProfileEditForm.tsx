@@ -1,10 +1,10 @@
 import React from 'react';
 import Button from '@/components/Button';
 import Form from "@/components/Form";
-import {Profile} from "@/features/profile/types/profile";
+import { Profile } from "@/features/profile/types/profile";
 import Input from "@/components/Input";
 import dayjs from "dayjs";
-import {strings} from "@/const/strings";
+import { strings } from "@/const/strings";
 
 type ProfileEditFormProps = {
   onSubmit: (data: Profile) => void;
@@ -28,8 +28,8 @@ const ProfileEditForm: React.FC<ProfileEditFormProps> = ({ onSubmit, defaultValu
           <Input name="state" label={strings.state} options={['CA', 'FL', 'NY']} />
         </div>
 
-        <Input name="favoriteCharacter" label={strings.favoriteCharacter} placeholder={strings.favoriteCharacter} />
-        <Input name="favoriteMovie" label={strings.favoriteMovie} placeholder={strings.favoriteMovie} />
+        <Input name="favoriteCharacter" label={strings.favoriteDisneyCharacter} placeholder={strings.favoriteDisneyCharacter} />
+        <Input name="favoriteMovie" label={strings.favoriteDisneyMovie} placeholder={strings.favoriteDisneyMovie} />
         <Input name="favoriteDisneyland" label={strings.favoriteDisneyland} options={['Disneyland, CA', 'Disney World, FL']} />
 
         <div className="flex space-x-4 mt-4">
