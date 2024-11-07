@@ -1,6 +1,11 @@
-import React, {ReactNode} from 'react';
+import React, { ReactNode } from 'react';
 
-const Container = ({ className, children }: { className?: string, children: ReactNode }) => {
+type ContainerProps = {
+  className?: string,
+  children: ReactNode
+}
+
+const Container: React.FC<ContainerProps> = ({ className, children }) => {
   return (
     <main className={`container mx-auto ${className}`}>
       {children}

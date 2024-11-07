@@ -1,7 +1,8 @@
 "use client"
 import React, { createContext, useContext, useEffect, useState, ReactNode, useCallback } from 'react';
-import { Character } from "@/types/character";
+import { Character } from "@/features/character/types/character";
 import CharacterService from "@/features/character/services/character.service";
+import {featuredNames} from "@/features/character/types/featuredNames";
 
 type CharacterContextType = {
   featuredCharacters: Character[];
@@ -43,7 +44,6 @@ export const CharacterProvider: React.FC<{ children: ReactNode }> = ({ children 
   }, [searchQuery, page]);
 
   const loadFeaturedCharacters = async () => {
-    const featuredNames = ['Belle', 'Beast', 'Mickey Mouse', 'Donald Duck'];
     const characterPromises = featuredNames.map(name => CharacterService.findByFilters({ name, ...(name === "Belle" && {films: ["Beauty and the Beast"]}) }));
     const results = await Promise.all(characterPromises);
     const featured = results.flatMap(result => result).filter(character => featuredNames.includes(character.name));

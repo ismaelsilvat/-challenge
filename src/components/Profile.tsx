@@ -6,7 +6,7 @@ const UserProfile: React.FC = () => (
     <img
       src="/avatar.png"
       alt="User Avatar"
-      className="h-10 w-10 rounded-full border border-gray-300 cursor-pointer"
+      className="h-10 w-10 rounded-full border border-grayBorder cursor-pointer"
     />
   </Link>
 );

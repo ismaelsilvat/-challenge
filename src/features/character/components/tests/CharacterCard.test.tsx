@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import CharacterCard from '../CharacterCard';
-import { Character } from "@/types/character";
+import { Character } from "@/features/character/types/character";
 
 const mockCharacter: Character = {
   _id: 1,

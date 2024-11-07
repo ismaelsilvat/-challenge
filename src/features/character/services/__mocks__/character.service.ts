@@ -1,4 +1,4 @@
-import { Character } from '@/types/character';
+import { Character } from '@/features/character/types/character';
 
 const mockCharacters: Character[] = [
   {

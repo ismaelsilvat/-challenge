@@ -1,7 +1,7 @@
 "use client"
 import React, {useEffect, useState} from 'react';
 import CharacterCard from './CharacterCard';
-import { Character } from '@/types/character';
+import { Character } from '@/features/character/types/character';
 import Grid from '@/components/Grid';
 import Button from '@/components/Button';
 import { useCharacters } from "@/contexts/CharacterContext";
@@ -49,13 +49,13 @@ const CharacterGrid: React.FC<CharacterGridProps> = ({ isFeaturedGrid, className
       <Grid
         title={(searchQuery && !isFeaturedGrid) ? `Search Results - ${searchQuery}` : undefined}
         className={className}
-        items={isFeaturedGrid ? featuredCharacters : characters.length > 0 ? characters : Array.from({ length: 8 }) as Character[]}
+        items={isFeaturedGrid ? featuredCharacters : !isLoading ? characters : Array.from({ length: 8 }) as Character[]}
         renderItem={(character: Character, index: number) => (
           isLoading ? (
             <SkeletonCard key={index} />
           ) : (
             <CharacterCard
-              key={character._id}
+              key={character?._id || index}
               character={character}
               onViewProfile={() => handleViewProfile(character)}
             />
@@ -63,11 +63,11 @@ const CharacterGrid: React.FC<CharacterGridProps> = ({ isFeaturedGrid, className
         )}
       />
       {!isFeaturedGrid && characters.length > 0 && (
-        <div className="flex justify-between items-center bg-[#F1F2F3] px-5 md:px-20 pb-10">
+        <div className="flex justify-between items-center bg-grayBackground px-5 md:px-20 pb-10">
           <Button onClick={handlePreviousPage} disabled={page === 1}>
             Previous
           </Button>
-          <span className="text-gray-700">Page {page} of {totalPages}</span>
+          <span className="text-defaultText">Page {page} of {totalPages}</span>
           <Button onClick={handleNextPage} disabled={page === totalPages}>
             Next
           </Button>

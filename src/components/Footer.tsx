@@ -4,7 +4,7 @@ import Logo from './Logo';
 const Footer: React.FC = () => (
   <footer className="flex flex-col items-center py-8">
     <Logo />
-    <p className="mt-2 text-sm text-gray-600">
+    <p className="mt-2 text-sm text-footer">
       For educational use only. All characters and content are the property of Disney. This test is for private use and development testing only and should not be distributed for public consumption
     </p>
   </footer>

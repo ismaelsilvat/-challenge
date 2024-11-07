@@ -1,35 +1,29 @@
 import React from 'react';
-import { useCharacters } from "@/contexts/CharacterContext";
 
 type SearchInputProps = {
   placeholder?: string;
+  disabled?: boolean;
+  className?: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onClear?: () => void;
+  value: string;
 };
 
-const SearchInput: React.FC<SearchInputProps> = ({ placeholder = 'Search...' }) => {
-  const { searchQuery, setSearchQuery, enableSearch } = useCharacters();
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchQuery(e.target.value);
-  };
-
-  const clearSearch = () => {
-    setSearchQuery('');
-  };
-
+const SearchInput: React.FC<SearchInputProps> = ({ placeholder = 'Search...', disabled = false, value, className, onChange, onClear }) => {
   return (
     <div className="relative w-full">
       <input
-        disabled={!enableSearch}
+        disabled={disabled}
         type="text"
-        value={searchQuery}
-        onChange={handleInputChange}
+        value={value}
+        onChange={onChange}
         placeholder={placeholder}
-        className={`w-full h-[48px] px-4 py-2 text-gray-800 font-medium rounded-full bg-[#F1F2F3] border-none focus:outline-none focus:ring-2 focus:ring-blue-500 ${!enableSearch && "opacity-50"}`}
+        className={`w-full h-12 px-4 py-2 text-placeholder text-base font-medium rounded-full bg-grayBackground border-none focus:outline-none ${className}`}
       />
-      {searchQuery && (
+      {value && (
         <button
-          onClick={clearSearch}
-          className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700"
+          onClick={onClear}
+          className="absolute right-4 top-1/2 transform -translate-y-1/2 text-base text-placeholder"
           aria-label="Clear search"
         >
           ✕

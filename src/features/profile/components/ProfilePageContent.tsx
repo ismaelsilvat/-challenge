@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import Button from "@/components/Button";
 import ProfileEditForm from "@/features/profile/components/ProfileEditForm";
 import Container from "@/components/Container";
-import { Profile } from "@/types/profile";
+import { Profile } from "@/features/profile/types/profile";
 import Cookies from "js-cookie";
 import { PROFILE_COOKIE_KEY } from "@/features/profile/const/profile";
-import {useCharacters} from "@/contexts/CharacterContext";
+import { useCharacters } from "@/contexts/CharacterContext";
 
 const initialProfile: Profile = {
   firstName: 'John',
@@ -25,7 +25,7 @@ type FieldDataProps = {
 }
 
 const FieldData = ({name, value}: FieldDataProps) => (
-  <p className="text-gray-800 text-lg font-bold mb-1">
+  <p className="text-defaultText text-lg font-bold mb-4">
    {name}: {value}
   </p>
 )
@@ -59,11 +59,11 @@ const ProfilePageContent = () => {
 
   return (
     <Container>
-      <div className="bg-gray-100 p-10 md:p-20 rounded-lg">
+      <div className="bg-grayBackground p-10 md:p-20 rounded-lg">
         {!isEditing ? (
             <>
-              <h1 className="text-5xl font-bold mb-4 text-gray-800">{profile.firstName} {profile.lastName}</h1>
-              <p className="text-gray-500 text-xs mb-10">Last Updated: {profile.lastUpdated}</p>
+              <h1 className="text-xl font-bold text-defaultText">{profile.firstName} {profile.lastName}</h1>
+              <p className="text-defaultText text-sm mb-8">Last Updated: {profile.lastUpdated}</p>
               <FieldData name="Age" value={new Date().getFullYear() - new Date(profile.birthDate).getFullYear()} />
               <FieldData name="Location" value={`${profile.city}, ${profile.state}`} />
               <FieldData name="Favorite Disney Character" value={profile.favoriteCharacter} />
