@@ -1,6 +1,8 @@
+import { strings } from "@/const/strings";
+
 export const formatFilms = (films: string[] | undefined): string => {
     if (!films || films.length === 0) {
-      return "None";
+      return strings.none;
     }
   
     const slicedFilms = films.slice(0, 3);
