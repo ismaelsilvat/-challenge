@@ -81,4 +81,4 @@ The project was developed with a focus on lean and scalable practices. By using 
 
 ## Preview
 
-![Descrição do GIF](preview.gif)
+![Preview of application](preview.gif)
