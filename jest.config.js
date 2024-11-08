@@ -12,4 +12,11 @@ module.exports = {
   transformIgnorePatterns: [
     '/node_modules/(?!(@testing-library)/)',
   ],
+  globals: {
+    'ts-jest': {
+      tsconfig: {
+        jsx: 'react',
+      },
+    },
+  },
 };
