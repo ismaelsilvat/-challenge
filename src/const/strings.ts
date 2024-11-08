@@ -25,7 +25,7 @@ export const strings = {
   exploreMoreCharacterDetails: "Explore More Character Details",
   none: "None",
   search: "Search...",
-  searchResults: "Search Results",
+  searchResults: (searchQuery: string) => `Search Results - ${searchQuery}`,
   viewProfile: "VIEW PROFILE",
   clearSearch: "Clear search",
   findCharacter: "Find a character...",
